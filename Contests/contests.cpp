@@ -1,33 +1,26 @@
 #include <iostream>
 #include <vector>
-#include <cmath>
+#include <algorithm>
 using namespace std;
-
+int calculateFibonacciness(int a1, int a2, int a3, int a4, int a5) {
+    int count = 0;
+    if (a3 == a1 + a2) count++;
+    if (a4 == a2 + a3) count++;
+    if (a5 == a3 + a4) count++;
+    return count;
+}
 int main() {
-    int n;
-    cin >> n;
-    
-    vector<int> arr(n);
-    for (int i = 0; i < n; i++) {
-        cin >> arr[i];
-    }
-    int min_ind = 0, max_ind = 0;
-
-    for (int i = 0; i < n; i++) {
-        if (arr[i] <= arr[min_ind]) {
-            min_ind = i;
+    int t;
+    cin >> t;
+    while (t--) {
+        int a1, a2, a4, a5;
+        cin >> a1 >> a2 >> a4 >> a5;
+        int maxFibonacciness = 0;
+        vector<int> possible_a3 = {a4 - a2, a5 - a4, a1 + a2};
+        for (int a3 : possible_a3) {
+            maxFibonacciness = max(maxFibonacciness, calculateFibonacciness(a1, a2, a3, a4, a5));
         }
-        if (arr[i] > arr[max_ind]) {
-            max_ind = i;
-        }
+        cout << maxFibonacciness << "\n";
     }
-
-    int total_swaps = abs(max_ind - 0) + abs(min_ind - (n - 1));
-    if (max_ind > min_ind) {
-        total_swaps--;
-    }
-
-    cout << total_swaps << endl;
-
     return 0;
 }
