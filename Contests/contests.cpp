@@ -18,22 +18,19 @@ void solve() {
             cin >> arr[i];
             freq[arr[i]]++;
         }
-
         int score = 0;
-
         for (auto& [num, count] : freq) {
-            int complement = k - num;
-            if (freq.find(complement) != freq.end()) {
-                int pairs = min(count, freq[complement]);
-                if (num == complement) {
+            int a = k - num;
+            if (freq.find(a) != freq.end()) {
+                int pairs = min(count, freq[a]);
+                if (num == a) {
                     pairs /= 2;
                 }
                 score += pairs;
                 freq[num] -= pairs;
-                freq[complement] -= pairs;
+                freq[a] -= pairs;
             }
         }
-
         cout << score << "\n";
     }
 }

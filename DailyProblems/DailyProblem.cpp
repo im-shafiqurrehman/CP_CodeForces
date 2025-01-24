@@ -1,18 +1,29 @@
 #include <iostream>
-#include <string>
-
+#include <vector>
+#include <algorithm>
 using namespace std;
-
-int main() {
-    string num1, num2;
-    cin >> num1 >> num2;
-
-    string result = "";
-    for (int i = 0; i < num1.size(); ++i) {
-        result += (num1[i] != num2[i]) ? '1' : '0';
+	
+void Solve() {
+    int n, x;
+    cin >> n >> x;
+    vector<int> gasStation(n);
+    
+    for (int i = 0; i < n; i++) {
+        cin >> gasStation[i];
     }
-
-    cout << result << endl;
-
+    int maxDist = gasStation[0];
+    for (int i = 1; i < n; i++) {
+        maxDist = max(maxDist, gasStation[i] - gasStation[i - 1]);
+    }
+    maxDist = max(maxDist, (x - gasStation[n - 1]) * 2);
+    
+    cout << maxDist << endl;
+}
+int main() {
+    int t;
+    cin >> t;
+    while (t--) {
+        Solve();
+    }
     return 0;
 }
