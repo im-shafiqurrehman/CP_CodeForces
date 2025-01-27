@@ -1,41 +1,24 @@
 #include <iostream>
-#include <unordered_map>
-#include <vector>
+#include <string>
 using namespace std;
 
-void solve() {
-    int t;
-    cin >> t;
-
-    while (t--) {
-        int n, k;
-        cin >> n >> k;
-
-        vector<int> arr(n);
-        unordered_map<int, int> freq;
-
-        for (int i = 0; i < n; ++i) {
-            cin >> arr[i];
-            freq[arr[i]]++;
+int countBlocks(const string& s) {
+    int blocks = 0;
+    for (size_t i = 0; i < s.length(); ++i) {
+        if (s[i] == '1') {
+            ++blocks;
         }
-        int score = 0;
-        for (auto& [num, count] : freq) {
-            int a = k - num;
-            if (freq.find(a) != freq.end()) {
-                int pairs = min(count, freq[a]);
-                if (num == a) {
-                    pairs /= 2;
-                }
-                score += pairs;
-                freq[num] -= pairs;
-                freq[a] -= pairs;
-            }
-        }
-        cout << score << "\n";
     }
+    return blocks;
 }
 
 int main() {
-    solve();
+    int t;
+    cin >> t;
+    while (t--) {
+        string s;
+        cin >> s;
+        cout << countBlocks(s) << endl;
+    }
     return 0;
 }
