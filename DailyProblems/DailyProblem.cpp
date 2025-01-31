@@ -1,24 +1,42 @@
 #include <iostream>
 #include <vector>
-#include <algorithm>
+#include <string>
 using namespace std;
-	
+
 void Solve() {
-    int n, x;
-    cin >> n >> x;
-    vector<int> gasStation(n);
-    
+    int n;
+    cin >> n;
+    vector<string> s(n); 
+
     for (int i = 0; i < n; i++) {
-        cin >> gasStation[i];
+        cin >> s[i];
     }
-    int maxDist = gasStation[0];
-    for (int i = 1; i < n; i++) {
-        maxDist = max(maxDist, gasStation[i] - gasStation[i - 1]);
-    }
-    maxDist = max(maxDist, (x - gasStation[n - 1]) * 2);
-    
-    cout << maxDist << endl;
+
+      unordered_map<int, int> dp;
+        for (int item : arr) {
+            dp[item]++;
+        }
+
+
+        if (dp.size() == 1) {
+            cout << "Yes" << endl;
+        } else if (dp.size() == 2) {
+            auto it = dp.begin();
+            int count1 = it->second;
+            ++it;
+            int count2 = it->second;
+            int temp = abs(count1 - count2);
+            if (temp <= 1) {
+                cout << "Yes" << endl;
+            } else {
+                cout << "No" << endl;
+            }
+        } else {
+            cout << "No" << endl;
+        }
+
 }
+
 int main() {
     int t;
     cin >> t;
